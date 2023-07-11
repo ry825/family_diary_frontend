@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.paper {
+  margin-top: 8;
+  display: flex;
+  flex-direction: column;
+  align-Items: center;
+}
+
+.avatar {
+  margin: 1;
+  background-color: #f44336;
+}
+
+form {
+  width: 100%;
+  margin-Top: 1;
+}
+
+.loginSpan {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: teal;
+}
+
+.spanError {
+  display: flex;
+  flex-Direction: column;
+  align-Items: center;
+  color: fuchsia;
+  margin-Top: 10;
+}
+
+.loginSubmit {
+  margin: 3;
+}
+
+.fc .fc-toolbar.fc-header-toolbar {
+  margin-bottom: 1.5em;
+  margin-top: 1.5em;
+}
+
+.toggle-button-group{
+  display: flex;
+  justify-content: center
+}
+
+.title{
+  display: flex;
+  justify-content: center
+}
+
+.title-name{
+  margin-left: 10%;
+}
+
+.submit-btn{
+  display: flex;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
