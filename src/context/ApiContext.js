@@ -1,9 +1,7 @@
 import React, {createContext, useState, useEffect} from 'react'
 import {axiosClient} from '../components/HandleAxiosError'
 import { withCookies } from 'react-cookie'
-import dotenv from 'dotenv';
 
-dotenv.config();
 
 export const ApiContext = createContext()
 
@@ -49,7 +47,7 @@ const ApiContextProvider = (props) => {
     const [deleteVideoList, setDeleteVideoList] = useState([]);
     const [deletePhotoList, setDeletePhotoList] = useState([]);
     
-    const url = process.env.REACT_APP_URL
+    const url = process.env.REACT_APP_URL || 'http://127.0.0.1:8000'
     
     // ユーザー固有のIDを取得
     useEffect(()=>{
