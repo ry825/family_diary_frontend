@@ -83,7 +83,7 @@ const Main = () => {
         select:handleSelect,
         datesSet:handleHeaderButtonClick,
         eventClick:handleEventClick,
-        ontouchstart:handleSelect,
+        dateClick:handleSelect
     }
 
     return (
