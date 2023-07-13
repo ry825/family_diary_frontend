@@ -1,6 +1,9 @@
 import React, {createContext, useState, useEffect} from 'react'
 import {axiosClient} from '../components/HandleAxiosError'
 import { withCookies } from 'react-cookie'
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 export const ApiContext = createContext()
 
@@ -45,13 +48,14 @@ const ApiContextProvider = (props) => {
     const [editVideos, setEditVideos] = useState([]);
     const [deleteVideoList, setDeleteVideoList] = useState([]);
     const [deletePhotoList, setDeletePhotoList] = useState([]);
-
+    
+    const url = process.env.REACT_APP_URL
     
     // ユーザー固有のIDを取得
     useEffect(()=>{
         const getUserId =async() => {
             if(token){
-                const newRes = await axiosClient.get('http://127.0.0.1:8000/api/user/info',{
+                const newRes = await axiosClient.get(`${url}/api/user/info`,{
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `JWT ${token}`
@@ -75,7 +79,7 @@ const ApiContextProvider = (props) => {
         setDiaryList([])
         const getDiariesPageLoad = async() => {
             try {
-                const res = await axiosClient.get('http://localhost:8000/api/diary/', {
+                const res = await axiosClient.get(`${url}/api/diary/`, {
                     params: {
                         filter_param: pagination,
                         user_id: userId
@@ -97,7 +101,7 @@ const ApiContextProvider = (props) => {
 
     const getDiaries = async() => {
         try {
-            const res = await axiosClient.get('http://localhost:8000/api/diary/', {
+            const res = await axiosClient.get(`${url}/api/diary/`, {
                 params: {
                     filter_param: pagination,
                     user_id: userId,
@@ -134,7 +138,7 @@ const ApiContextProvider = (props) => {
             })
         }
         try {
-            const res = await axiosClient.post('http://127.0.0.1:8000/api/diary/video/', uploadData,{
+            const res = await axiosClient.post(`${url}/api/diary/video/`, uploadData,{
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `JWT ${token}`
@@ -178,7 +182,7 @@ const ApiContextProvider = (props) => {
         }
 
         try {
-            const res = await axiosClient.post('http://127.0.0.1:8000/api/diary/picture/', uploadData, {
+            const res = await axiosClient.post(`${url}/api/diary/picture/`, uploadData, {
                 headers: {
                     'Content-Type': 'multipart/form-data',
                     'Authorization': `JWT ${token}`
@@ -212,7 +216,7 @@ const ApiContextProvider = (props) => {
         uploadData.append('year', year)
         uploadData.append('month', month)
         try {
-            const res = await axiosClient.post('http://127.0.0.1:8000/api/diary/', uploadData, {
+            const res = await axiosClient.post(`${url}/api/diary/`, uploadData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `JWT ${token}`
@@ -243,7 +247,7 @@ const ApiContextProvider = (props) => {
         uploadData.append('startTime', startTime)
         uploadData.append('endTime', endTime)
         try {
-            const res = await axiosClient.post('http://127.0.0.1:8000/api/schedule/', uploadData, {
+            const res = await axiosClient.post(`${url}/api/schedule/`, uploadData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `JWT ${token}`
@@ -261,7 +265,7 @@ const ApiContextProvider = (props) => {
 
     const getDetailDiary = async(id) => {
         try {
-            const res = await axiosClient.get(`http://localhost:8000/api/diary/${id}`, {
+            const res = await axiosClient.get(`${url}/api/diary/${id}`, {
                 headers: {
                     'Authorization': `JWT ${token}`
                 }})
@@ -275,7 +279,7 @@ const ApiContextProvider = (props) => {
     const deleteDiary = async(id) => {
         try {
             await axiosClient.delete(
-                `http://127.0.0.1:8000/api/diary/${id}/`,
+                `${url}/api/diary/${id}/`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -292,7 +296,7 @@ const ApiContextProvider = (props) => {
     const deleteVideo = async() => {
         try {
             await axiosClient.delete(
-                'http://127.0.0.1:8000/api/diary/video/',
+                `${url}/api/diary/video/`,
                 {
                     data: {
                         ids: deleteVideoList
@@ -323,7 +327,7 @@ const ApiContextProvider = (props) => {
     const deletePhoto = async() => {
         try {
             await axiosClient.delete(
-                'http://127.0.0.1:8000/api/diary/picture/',
+                `${url}/api/diary/picture/`,
                 {
                     data: {
                         ids: deletePhotoList
@@ -353,7 +357,7 @@ const ApiContextProvider = (props) => {
     const deleteSchedule = async() => {
         try {
             await axiosClient.delete(
-                `http://127.0.0.1:8000/api/schedule/${selectedSchedule.id}/`,
+                `${url}/api/schedule/${selectedSchedule.id}/`,
                 {
                     headers: {
                         'Content-Type': 'application/json',
@@ -375,7 +379,7 @@ const ApiContextProvider = (props) => {
         uploadData.append('year', year)
         uploadData.append('month', month)
         try {
-            const res = await axiosClient.put(`http://127.0.0.1:8000/api/diary/${diary.id}/`, uploadData, {
+            const res = await axiosClient.put(`${url}/api/diary/${diary.id}/`, uploadData, {
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `JWT ${token}`
