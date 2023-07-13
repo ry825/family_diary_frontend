@@ -401,7 +401,7 @@ const ApiContextProvider = (props) => {
     const handleSelect = (selectionInfo: any) => {
         //モーダル開く
         // includesで日付が一致したら、詳細ページのmodalを開くようにする
-        const selectedDate = selectionInfo.startStr
+        const selectedDate = selectionInfo.dateStr
         let diaryArray = []
         for(let i=0; i<diaryList.length; i++){
             diaryArray.push(diaryList[i].date)
@@ -413,9 +413,9 @@ const ApiContextProvider = (props) => {
         }
 
         setDate('')
-        setDate(selectionInfo.startStr)
-        setYear(selectionInfo.start.getFullYear())
-        setMonth(selectionInfo.start.getMonth() + 1)
+        setDate(selectionInfo.dateStr)
+        setYear(selectionInfo.date.getFullYear())
+        setMonth(selectionInfo.date.getMonth() + 1)
     }
 
     const eventClick = (date, eventId) => {

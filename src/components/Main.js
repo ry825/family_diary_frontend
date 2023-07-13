@@ -80,7 +80,6 @@ const Main = () => {
             end: ''
         },
         editable: true,
-        select:handleSelect,
         datesSet:handleHeaderButtonClick,
         eventClick:handleEventClick,
         dateClick:handleSelect
