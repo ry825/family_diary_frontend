@@ -21,7 +21,6 @@ import DialogContentText from '@mui/material/DialogContentText';
 import Button from '@mui/material/Button';
 import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
-
 const DiaryDetailEdit = () => {
     Modal.setAppElement('#root');
     const maxImageUpload = 10
@@ -90,11 +89,13 @@ const DiaryDetailEdit = () => {
         }
     }
 
-    const deleteDiaryConfirm = () => {
+    // 削除されたeventsアイテムをカレンダーから消すため非同期
+    const deleteDiaryConfirm = async() => {
         setDeleteDialogIsOpen(false)
-        deleteDiary(diary.id)
-        getDiaries()
+        await deleteDiary(diary.id)
         setDetailModalIsOpen(false);
+        setDiaryList([])
+        await getDiaries()
         setIsEditMode(false);
         setDeletePhotoList([]);
         setDeleteVideoList([]);
@@ -138,6 +139,7 @@ const DiaryDetailEdit = () => {
         setAlignment,
         setDiary,
         setDetailModalIsOpen,
+        setDiaryList,
 
         cardMediaClick,
         editSave,
@@ -150,7 +152,7 @@ const DiaryDetailEdit = () => {
     const [dialogIsOpen, setDialogIsOpen] = useState(false)
     const [deleteDialogIsOpen, setDeleteDialogIsOpen] = useState(false)
     const [dialogOpenType, setDialogOpenType] = useState()
-
+    
     // 編集モードか閲覧モードか判定,編集中の場合、保存、キャンセル時にダイアログ表示
     const dialogOpenJudge = (dialogType) => {
         if(isEditMode === true){
@@ -646,10 +648,10 @@ return (
                 onRequestClose={() => {setPhotoEnlarge(false);}}
                 style={{
                     overlay: {
-                        zIndex: 1000,
+                        zIndex: 2000,
                     },
                     content: {
-                        zIndex: 1000,
+                        zIndex: 2000,
                         height: 'auto',
                     },
                 }}
