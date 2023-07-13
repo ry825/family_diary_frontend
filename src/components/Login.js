@@ -11,6 +11,8 @@ import CircularProgress from '@mui/material/CircularProgress';
 
 import { START_FETCH, FETCH_SUCCESS, ERROR_CATCHED, INPUT_EDIT, TOGGLE_MODE } from './actionTypes'
 
+const url = process.env.REACT_APP_URL || 'http://127.0.0.1:8000'
+
 const initialState = {
     isLoading: false,
     isLoginView: true,
@@ -78,7 +80,7 @@ const Login = (props) => {
         if(state.isLoginView) {
             try {
                 dispatch({type: START_FETCH})
-                const res = await axios.post('http://127.0.0.1:8000/authen/jwt/create', state.credentialsLog ,{
+                const res = await axios.post(`${url}/authen/jwt/create`, state.credentialsLog ,{
                 headers: {'Content-Type': 'application/json'}})
                 props.cookies.set('jwt-token', res.data.access);
                 res.data.access ? window.location.href = '/sns' : window.location.href = '/';
@@ -89,7 +91,7 @@ const Login = (props) => {
         } else {
             try {
                 dispatch({type: START_FETCH})
-                const res = await axios.post('http://127.0.0.1:8000/api/user/create/', state.credentialsLog ,{
+                const res = await axios.post(`${url}/api/user/create/`, state.credentialsLog ,{
                 headers: {'Content-Type': 'application/json'}})
                 props.cookies.set('jwt-token', res.data.access);
                 res.data.access ? window.location.href = '/sns' : window.location.href = '/';
