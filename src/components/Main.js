@@ -82,7 +82,8 @@ const Main = () => {
         editable: true,
         select:handleSelect,
         datesSet:handleHeaderButtonClick,
-        eventClick:handleEventClick
+        eventClick:handleEventClick,
+        ontouchstart:handleSelect,
     }
 
     return (
